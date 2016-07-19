@@ -3,10 +3,10 @@
 package middleware
 
 import (
-	"time"
 	"github.com/emicklei/go-restful"
 	"github.com/emicklei/go-restful/log"
 	"net/http"
+	"time"
 )
 
 // https://httpd.apache.org/docs/2.2/logs.html#combined + execution time.
@@ -24,7 +24,6 @@ type ApacheLogRecord struct {
 	userAgent             string
 	elapsedTime           time.Duration
 }
-
 
 func ApiLogger(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
 	startTime := time.Now()
@@ -47,7 +46,6 @@ func ApiLogger(req *restful.Request, resp *restful.Response, chain *restful.Filt
 		userAgent = "-"
 	}
 
-	log.Logger.Printf(apacheFormatPattern, r.RemoteAddr, timeFormatted, r.Method, r.RequestURI, r.Proto, resp.StatusCode(), resp.ContentLength(), referer, userAgent,
-		finishTime.Sub(startTime).Seconds())
+	log.Logger.Printf(apacheFormatPattern, r.RemoteAddr, timeFormatted, r.Method, r.RequestURI, r.Proto, resp.StatusCode(), resp.ContentLength(), referer, userAgent, finishTime.Sub(startTime).Seconds())
 
 }
