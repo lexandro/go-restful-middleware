@@ -4,7 +4,7 @@ Middleware components for the github.com/emicklei/go-restful library
 
 # In progress
 
-**stats** - logging execution time, methods, etc per endpoint
+**metrics** - logging execution time, methods, etc per endpoint
 
 # List of components
 
