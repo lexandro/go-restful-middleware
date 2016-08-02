@@ -5,6 +5,7 @@ Middleware components for the github.com/emicklei/go-restful library
 # In progress
 
 **metrics** - logging execution time, methods, etc per endpoint
+status codes, avg duration numofcalls, methods,
 
 # List of components
 
@@ -14,6 +15,10 @@ Log access stats from the clients in standard apache combined access log format
 # Ideas / TODO
 
 **wrapper** - add your own middleware
+
+**recorder** - record the the last x. call
+
+**stats** - https://github.com/thoas/stats
 
 **hook** - only hijack the subset of the middleware features (pre/post/etc)
 

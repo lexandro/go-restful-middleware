@@ -4,12 +4,19 @@ import (
 	"fmt"
 	"github.com/emicklei/go-restful"
 	"net/http"
+	"sync"
 )
+
 type MockLogger struct {
 	Calls     int
 	LastEntry string
 }
 
+func SendAsyncRequest(wg *sync.WaitGroup, req *http.Request, rw http.ResponseWriter) (err error) {
+	err = SendRequest(req, rw)
+	defer wg.Done()
+	return
+}
 func SendRequest(req *http.Request, rw http.ResponseWriter) (err error) {
 	// handle panic
 	defer func() {
@@ -25,6 +32,7 @@ func SendRequest(req *http.Request, rw http.ResponseWriter) (err error) {
 }
 
 func DummyHandleFunc(_ *restful.Request, _ *restful.Response) {
+
 }
 
 func (ml *MockLogger) Print(v ...interface{}) {
