@@ -18,7 +18,7 @@ func Test_ApiLogger(t *testing.T) {
 	}
 	ws := new(restful.WebService)
 	ws.Path("/test").Route(ws.GET("/logger").To(DummyHandleFunc))
-	restful.Filter(ApiLogger)
+	restful.Filter(ApiLoggerFilter)
 	restful.Add(ws)
 	ml := &MockLogger{
 	}

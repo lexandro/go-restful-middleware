@@ -22,7 +22,7 @@ type ApacheLogRecord struct {
 	userAgent             string
 }
 
-func ApiLogger(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
+func ApiLoggerFilter(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
 	//
 	chain.ProcessFilter(req, resp)
 	r := req.Request
