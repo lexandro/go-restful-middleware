@@ -4,24 +4,28 @@ Middleware components for the github.com/emicklei/go-restful library
 
 # In progress
 
-**metrics** - logging execution time, methods, etc per endpoint
-status codes, avg duration numofcalls, methods,
+**recorder** - record the the last x. call
+set buffer size (global, per endpoint)
+playback - curl, json,?
 
 # List of components
 
 ## Logger
 Log access stats from the clients in standard apache combined access log format
 
+## ApiMetrics
+Tracking execution time, http methods, status codes per endpoint
+
 # Ideas / TODO
 
-**wrapper** - add your own middleware
+**forwarder** - all requests are forwarded to a remote url
 
-**recorder** - record the the last x. call
-
-**stats** - https://github.com/thoas/stats
+**stats** - global app stats, https://github.com/thoas/stats
 
 **hook** - only hijack the subset of the middleware features (pre/post/etc)
 
 **timeout|timebox** - time boxed execution of the API function(s)
 
 **negroni** - using negroni with emicklei?
+
+**wrapper** - add your own middleware
