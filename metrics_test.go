@@ -5,8 +5,8 @@ import (
 	"github.com/lexandro/go-assert"
 	"net/http"
 	"testing"
-	"fmt"
 	"sync"
+	"time"
 )
 
 func Test_MetricsLogger(t *testing.T) {
@@ -36,8 +36,14 @@ func Test_MetricsLogger(t *testing.T) {
 
 	}
 	wg.Wait()
+	// we should wait for a while to make sure all metrics are received and processed
+	time.Sleep(5 * time.Millisecond)
 	// then
-	fmt.Printf("%d\n", ml.Calls)
-	assert.Equals(t, 1, ml.Calls)
-	assert.Equals(t, "127.456.789.012 - - [21/Jul/2016 10:49:32 +0000] \"GET /test/logger HTTP/1.1\" 200 0 \"fakeReferer\" \"fakeAgent\"\n", ml.LastEntry)
+	assert.Equals(t, 1, len(ApiMetrics))
+	ep := Endpoint{
+		Url:"/test/metrics",
+		Method:"GET",
+	}
+	metric := ApiMetrics[ep]
+	assert.Equals(t, int64(calls), *metric.NumberOfCalls)
 }
